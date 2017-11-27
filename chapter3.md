@@ -43,4 +43,9 @@
     * I/O观察者回调函数的行为就是取出请求对象的result属性作为参数，取出oncomplete_sym属性作为方法，然后调用执行，以此达到调用js中传入的回调函数的目的
   5. 在node中，js是单线程的，node自身其实是多线程的。
 5. 非I/O的API
+  1. 定时器
+    * 缺点：非精确的，如果某一次循环占用时间多，那么下一次循环可能超时
+  2. `process.nextTick()`
+  3. `setImmediate()`
+    * `process.nextTick()`的回调函数保存在数组里，`setImmediate()`的回调函数保存在链表里
 6. 事件驱动与高性能服务器
