@@ -49,3 +49,6 @@
   3. `setImmediate()`
     * `process.nextTick()`的回调函数保存在数组里，`setImmediate()`的回调函数保存在链表里
 6. 事件驱动与高性能服务器
+  * Apache是每线程/每请求，Node通过事件驱动处理请求，不用创建和销毁进线程，上下文切换的代价很低。
+
+*-end-*
