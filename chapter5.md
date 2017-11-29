@@ -40,5 +40,24 @@
       * 全局变量需要进程退出才会释放，如果需要释放它们，可以delete或者重新赋值。
     2. 闭包
       * 无法正常的回收
+  8. 查看node进程内存使用情况，结果中的rss代表resident set size常驻内存部分；heapTotal堆中共申请的内存量；heapUsed堆中使用中的内存量，单位都是字节。
+  ```
+  $ node
+  > process.memoryUsage()
+  ```
+  9. 查看操作系统内存使用情况，os模块中的`totalmem()`总内存和`freemem()`闲置内存
+  ```
+  $ node
+  > os.totalmem()
+  > os.freemem()
+  ```
+  10. 堆外内存：node中的内存使用并非都是通过v8进行分配的，不通过v8分配的内存叫堆外内存。
+  11. 内存泄漏的原因：
+    1. 缓存
+      * 在node中，小心使用缓存，防止用cpu执行时间换内存空间
+      * 尽量使用进程外缓存，这样可以让垃圾回收更高效、进程之间共享缓存，目前比价好的缓存有`redis`和`memcached`
+    2. 队列消费不及时
+    3. 作用域未释放
+  12. 内存泄漏排查，主要工具有`node-heapdump`和`node-memwatch`
 
 *-end-*
