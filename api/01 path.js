@@ -32,5 +32,69 @@ path.isAbsolute('../baz'); // false
 
 /*
  * join
- * 
+ * 类似resolve，resolve是拼接成绝对路径，join只是拼接成路径
+*/
+
+/*
+ * dirname
+ * 返回目录名，忽略最后
+*/
+path.dirname('/baz/'); // 返回/
+path.dirname('/baz/bar'); //返回/baz
+
+/*
+ * basename
+ * 返回路径最后一部分
+ * 可选参数：文件扩展名
+*/
+path.basename('/baz/bar'); //返回bar
+path.basename('/baz/bar/'); //返回bar
+path.basename('/baz/bar.html', '.html'); //返回bar
+
+/*
+ * extname
+ * 返回扩展名
+*/
+path.extname('/baz/bar'); //返回为空
+path.extname('.html'); //返回为空
+path.extname('hello.html'); //返回.html
+
+/*
+ * fomat
+ * 传入对象
+ * 将传入的对象整理成路径
+ * @param   root
+ * @param   dir
+ * @param   base
+ * @param   name
+ * @param   ext
+*/
+path.format({}); //返回为空
+path.format({
+    root: '/foo',
+    dir: '/bar',
+    base: 'hello.html'
+});// root和dir同时存在，忽略root，使用dir，返回'/bar/hello.html'
+path.format({
+    dir: '/bar',
+    base: 'hello',
+    ext: '.txt'
+});// base存在时，忽略name和ext，即便base中并没有带扩展名，返回'/bar/hello'
+
+/*
+ * parse
+ * 与format相反
+*/
+path.parse('/bar/hello.html');
+//返回
+// { root: '/',
+//   dir: '/bar',
+//   base: 'hello.html',
+//   ext: '.html',
+//   name: 'hello' }
+
+/*
+ * sep
+ * 分隔符\或/
+ * win和posix系统有差异
 */
